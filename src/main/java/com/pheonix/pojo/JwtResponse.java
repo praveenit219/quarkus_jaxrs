@@ -2,10 +2,8 @@ package com.pheonix.pojo;
 
 import org.jose4j.jwt.JwtClaims;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JwtResponse {
 
 	private boolean valid;

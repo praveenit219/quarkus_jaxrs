@@ -55,10 +55,10 @@ memory test</description>
       <artifactId>jasypt-spring-boot-starter</artifactId>
       <version>${jasypt.version}</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-mongodb-client</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jsonb</artifactId>
