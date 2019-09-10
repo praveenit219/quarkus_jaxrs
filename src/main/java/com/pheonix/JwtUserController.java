@@ -36,6 +36,8 @@ import com.pheonix.utils.StringUtils;
 
 
 @Path("/identity/saml")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class JwtUserController {
 
 	private static final Logger log = LoggerFactory.getLogger(JwtUserController.class);
@@ -54,8 +56,6 @@ public class JwtUserController {
 	@POST
 	@AuthorizationCheck
 	@Path("/jwt/token")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response generateJwtTokenForCli(@Context UriInfo ui,@HeaderParam("Authorization") @NotBlank String authorization, @HeaderParam("date") @NotBlank String date, @Valid TokenRequest tokenRequest)  {
 		log.info("http json api request for JWT - generating token");
 		JwtTokenResponse jwtResponse = null;		
@@ -117,8 +117,6 @@ public class JwtUserController {
 	@POST
 	@AuthorizationCheck
 	@Path("/jwe/token")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response generateJweTokenForCli(@Context UriInfo ui,@HeaderParam("Authorization") String authorization, @HeaderParam("date") String date, TokenRequest tokenRequest)  {
 		log.info("http json api request for JWE - generating token");
 		JwtTokenResponse jwtResponse = null;		
@@ -147,8 +145,6 @@ public class JwtUserController {
 	@POST
 	@AuthorizationCheck
 	@Path("/jwe/token/claims")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response generateJweTokenVerificationForCli(@Context UriInfo ui,@HeaderParam("Authorization") String authorization, @HeaderParam("date") String date, JwtVerificationRequest tokenVerificationRequest)  {
 		log.info("http json api request for JWE - verifying token");
 		JwtClaimsResponse jwtResponse = null;		
@@ -163,8 +159,6 @@ public class JwtUserController {
 	@POST
 	@AdminApiAuthorizationCheck
 	@Path("/token/clockskew")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response generateClockSkew(ClockSkewRequest clockSkewRequest)  {
 		log.info("http json api request clokSkew Request");
 		String requestedUri = clockSkewRequest.getRequest();	
