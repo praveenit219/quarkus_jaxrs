@@ -26,14 +26,14 @@ public class ClockSkewService {
 	public ClockSkewResponse processClockSkewSecretDetails(String uri) {
 		String secret = "FNgLY+f.N{&M;/jp`J$X<<.e/lF[<C)r9(-[DT!LsPWmrMBZL7_@&<^N|zx9l?&";
 		ClockSkewResponse clockSkewResponse = null;
-
-		try {
-			
-			log.info("encyrpting hash for message {}",uri);
+		try {			
+			if(log.isDebugEnabled()) 
+				log.debug("encyrpting hash for message {}",uri);
 			String encryptMac = encryptHash(uri, secret);
 			Instant instant = Instant.now();
 			long epochMilli = instant.toEpochMilli();
-			log.info("calculated clockskew response Hash {} and millis {}", encryptMac, epochMilli);
+			if(log.isDebugEnabled()) 
+				log.debug("calculated clockskew response Hash {} and millis {}", encryptMac, epochMilli);
 			clockSkewResponse = new ClockSkewResponse();
 			clockSkewResponse.setAuthorization("Bearer "+ encryptMac);
 			clockSkewResponse.setUri(uri);

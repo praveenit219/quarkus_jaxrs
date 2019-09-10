@@ -41,7 +41,8 @@ public class JsonWebSecretKeyInitializer {
 	
 
 	public void loadJsonWebKeys() {
-		log.info("initialization of  jwonwebkey factory using staticKey");
+		if(log.isDebugEnabled()) 
+			log.debug("initialization of  jwonwebkey factory using staticKey");
 		JsonWebKey jwKey = null;
 		String jwtJson = null;
 		String jwtJsonkey = generatedSecreyKey.getSensitiveDataChecksum();

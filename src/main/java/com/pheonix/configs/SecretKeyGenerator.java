@@ -23,20 +23,23 @@ public class SecretKeyGenerator {
 
 	private String sensitiveDataChecksum = null;
 
-	
+
 	public SecretKeyGenerator() {}
 
 	void loadCheckSum() {
-		log.info("keyinitializer .............");
+		if(log.isDebugEnabled()) 
+			log.debug("keyinitializer .............");
 		try {
 			generateCheckSum("SHA-256");		
-			log.info("generated check sum for SHA-256");
+			if(log.isDebugEnabled()) 
+				log.debug("generated check sum for SHA-256");
 		} catch (NoSuchAlgorithmException | IOException e) {
 			log.error("loadCheckSum - KeyIntializer, error generating checkSum at startup {}", e);
 
 		}	
 		if(!StringUtils.isEmpty(getSensitiveDataChecksum())) {
-			log.info("loadCheckSum - KeyIntializer, loaded senisitive data CheckSum at startup");
+			if(log.isDebugEnabled()) 
+				log.debug("loadCheckSum - KeyIntializer, loaded senisitive data CheckSum at startup");
 		}
 	}
 
@@ -56,7 +59,7 @@ public class SecretKeyGenerator {
 	}
 
 	private void generateCheckSum(String algorithm) throws IOException, NoSuchAlgorithmException  {
-		
+
 		MessageDigest algDigest = MessageDigest.getInstance(algorithm);
 		setSensitiveDataChecksum(getFileChecksum(algDigest, readProtectedResorce()));
 	}

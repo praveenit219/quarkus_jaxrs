@@ -95,7 +95,8 @@ public class JwtUserService {
 
 
 	public JwtResponse  verifyJweorJwt(String token, String jwtOrJwe) throws InvalidJwtException {
-		log.info("verifyJweorJwt - JwtUserService, check jwt token for verification");
+		if(log.isDebugEnabled()) 
+			log.debug("verifyJweorJwt - JwtUserService, check jwt token for verification");
 		JwtResponse jwtResponse = new JwtResponse(false, null);		
 		JwtClaims jwtClaims = isJwtOrJwe(token,jwtOrJwe);
 		if( null!=jwtClaims) 
@@ -105,7 +106,8 @@ public class JwtUserService {
 
 
 	private JwtClaims isJwtOrJwe(String token, String jwtOrJwe) throws InvalidJwtException {
-		log.info("check if it is jwt or jwe from the request");
+		if(log.isDebugEnabled()) 
+			log.debug("check if it is jwt or jwe from the request");
 		JwtClaims jwtClaims = null;
 		if(!StringUtils.isEmpty(token)) {
 			if("jwe".equals(jwtOrJwe)) 
@@ -117,7 +119,8 @@ public class JwtUserService {
 	}
 
 	public JwtClaimsResponse verifyClaimsOnly(String token, String jwtOrJwe) throws MalformedClaimException, InvalidJwtException {
-		log.info("check jwt token for verification and return only claims details");
+		if(log.isDebugEnabled()) 
+			log.debug("check jwt token for verification and return only claims details");
 		JwtClaims jwtClaims = isJwtOrJwe(token,jwtOrJwe);
 		if( null!=jwtClaims) 
 			return buildClaimsResponse( jwtClaims);

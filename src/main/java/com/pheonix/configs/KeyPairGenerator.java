@@ -65,25 +65,25 @@ public class KeyPairGenerator {
 
 	protected void prepareKeyPair(String jwtKeyStore, String jwtKeyStorePwd, String jwtKeyStoreAlias,
 			boolean jwtKeyStoreEncrypted) {
-
-		log.info("preparing keypair to set using keystore details");
-
+		if(log.isDebugEnabled()) 
+			log.debug("preparing keypair to set using keystore details");
 		KeyStore keystore;
 		if(null!=keyInitializer) {
-			log.info("keyInitializer.getSensitiveDataChecksum() {}", keyInitializer.getSensitiveDataChecksum());
+			if(log.isDebugEnabled()) 
+				log.debug("keyInitializer.getSensitiveDataChecksum() {}", keyInitializer.getSensitiveDataChecksum());
 		}
 		try {
 			if(jwtKeyStoreEncrypted) {
-
-				log.info("decrypt using keyinitializer checksum is {}", keyInitializer.getSensitiveDataChecksum());				
+				if(log.isDebugEnabled()) 
+					log.debug("decrypt using keyinitializer checksum is {}", keyInitializer.getSensitiveDataChecksum());				
 				jwtKeyStorePwd = credentialDecryption.decrypt(keyInitializer.getSensitiveDataChecksum(),jwtKeyStorePwd);
-				log.info("key passwrod decryped is {}", jwtKeyStorePwd);
+				if(log.isDebugEnabled()) 
+					log.debug("key passwrod decryped is {}", jwtKeyStorePwd);
 			}
-
-			log.info(" proceeding to initialize the keys using the password");
+			if(log.isDebugEnabled()) 
+				log.debug(" proceeding to initialize the keys using the password");
 			keystore = KeyStore.getInstance(KeyStore.getDefaultType());
 			keystore.load(readProtectedResorce(), jwtKeyStorePwd.toCharArray());
-
 			setKeyPair(generatePrivateKey(findKeyFromKeystoreusingAlias(keystore, jwtKeyStoreAlias, jwtKeyStorePwd), keystore, jwtKeyStoreAlias));
 		} catch (KeyStoreException | NoSuchAlgorithmException e) {
 			log.error("keypair exception issue for keystore ", e);
@@ -105,19 +105,17 @@ public class KeyPairGenerator {
 		if (key instanceof PrivateKey) {		      
 			Certificate cert = keystore.getCertificate(jwtKeyStoreAlias);
 			PublicKey publicKey = cert.getPublicKey();
-
-			log.info("private Key generated..");
+			if(log.isDebugEnabled()) 
+				log.debug("private Key generated..");
 			return new KeyPair(publicKey, (PrivateKey) key);
 		}
 		return null;
 	}
 
 
-	 void loadKeys() {
-		log.info("calling postconstruct to resolve details..");
-
-		log.info(keyStoreConfiguration.toString());
-		log.info("getting keystore config details ..");
+	void loadKeys() {
+		if(log.isDebugEnabled()) 
+			log.debug("calling postconstruct to resolve details..");
 		if(keyStoreConfiguration.isEnable())
 			prepareKeyPair(keyStoreConfiguration.getLocation(), keyStoreConfiguration.getPwd(), keyStoreConfiguration.getAlias(),
 					keyStoreConfiguration.isEncrypted());

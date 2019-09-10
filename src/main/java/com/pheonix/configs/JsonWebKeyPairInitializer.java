@@ -44,7 +44,8 @@ public class JsonWebKeyPairInitializer {
 	}
 
 	void loadJsonWebKeys() {
-		log.info("initializing of  jwonwebkey factory using privatekey");
+		if(log.isDebugEnabled()) 
+			log.debug("initializing of  jwonwebkey factory using privatekey");
 		JsonWebKey jwKey = null;
 		try {
 			jwKey = Factory.newJwk(keyPairGenerator.getKeyPair().getPrivate());

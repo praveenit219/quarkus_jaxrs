@@ -1,8 +1,13 @@
 package com.pheonix.pojo;
 
+import javax.validation.constraints.NotBlank;
+
 public class Services {
 	
+	@NotBlank
 	private String gateway;
+	
+	@NotBlank
 	private String partnerId;
 	
 	public Services() {} 

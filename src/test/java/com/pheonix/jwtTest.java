@@ -14,7 +14,7 @@ public class jwtTest {
         given()
           .when().get("/")
           .then()
-             .statusCode(404);
+             .statusCode(200);
              
     }
 

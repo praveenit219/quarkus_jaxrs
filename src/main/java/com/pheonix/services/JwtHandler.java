@@ -48,7 +48,8 @@ public class JwtHandler {
 	JsonWebSecretKeyInitializer jsonWebKeyStatic;
 
 	public JwtTokenResponse generateJwsSecureLogin(JwtRequest jwtRequest, boolean isJwe)  {
-
+		if(log.isDebugEnabled()) 
+			log.debug("generating claims for token");
 		String status = "active";
 		long exp = calculateExpTimeForToken(jwtRequest.getJwtExpiryInDays());
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_EXP_FORMAT); 
@@ -98,7 +99,6 @@ public class JwtHandler {
 			log.debug("building JWS logic");
 		jws.setPayload(claims.toJson());
 		if(isJwe) {
-
 			jws.setKeyIdHeaderValue(jsonWebKeyPair.getJsonWebKey().getKeyId());
 			jws.setKey(jsonWebKeyPair.getJsonWebKey().getKey());
 		} else {
@@ -142,13 +142,15 @@ public class JwtHandler {
 	public JwtClaims parserJWEsecret(String jwt, boolean isJwe)throws InvalidJwtException {
 		JwtConsumer jwtConsumer = null;		
 		if(isJwe) {
-			log.info("check jwe and parse claims with internal keypair");
+			if(log.isDebugEnabled()) 
+				log.debug("check jwe and parse claims with internal keypair");
 			jwtConsumer = new JwtConsumerBuilder()				
 					.setExpectedIssuer(TOKEN_ISSUER)				
 					.setDecryptionKey(jsonWebKeyPair.getKeyPair().getPrivate())
 					.setVerificationKey(jsonWebKeyPair.getKeyPair().getPublic()).build();
 		} else {
-			log.info("check jws and parse claims with static keys");
+			if(log.isDebugEnabled()) 
+				log.debug("check jws and parse claims with static keys");
 			jwtConsumer = new JwtConsumerBuilder()				
 					.setExpectedIssuer(TOKEN_ISSUER)				
 					.setDecryptionKey(jsonWebKeyStatic.getJsonWebKey().getKey())

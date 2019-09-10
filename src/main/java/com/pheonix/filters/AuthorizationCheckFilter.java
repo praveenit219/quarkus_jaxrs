@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
@@ -23,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import com.pheonix.configs.AuthHeaderConfigs;
 import com.pheonix.configs.KeyHashGenerator;
+import com.pheonix.exceptions.JwtProcessingException;
 import com.pheonix.qualifiers.AuthorizationCheck;
 import com.pheonix.utils.StringUtils;
 
@@ -54,15 +54,17 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 			e.printStackTrace();
 		}
 		if(!isRequestValid) {
-			requestContext.abortWith(Response.status(Response.Status.FORBIDDEN.getStatusCode(), "forbidden!").build());
+			//requestContext.abortWith(Response.status(Response.Status.FORBIDDEN.getStatusCode(), "forbidden!").build());
+			throw new JwtProcessingException("Authorization validation failed");
 		}
 	}
 
 	public boolean validateAuthorization(String uri, String generatedTime, String authorization, boolean isJweRequired) throws Exception {
-		log.info("validate authorization with date and uri for the request");
+		if(log.isDebugEnabled()) 
+			log.debug("validate authorization with date and uri for the request");
 		String randomSecret = "FNgLY+f.N{&M;/jp`J$X<<.e/lF[<C)r9(-[DT!LsPWmrMBZL7_@&<^N|zx9l?&";
-
-		log.info("uri calling is {}", uri);
+		if(log.isDebugEnabled()) 
+			log.debug("uri calling is {}", uri);
 		boolean validAuth = false;
 		boolean hashMatched = false;
 		boolean isClockSkewCheck = authHeaderConfigs.isClockSkewDifference();
@@ -70,8 +72,10 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 			log.debug("authorization received in header is {}",authorization);
 		boolean matchAPIRequest =  verifyApiRequestMatch(uri, isJweRequired);
 		
-		if(!matchAPIRequest) 			
-			log.info("requests are not matching with the allowed URIs, please check the url");
+		if(!matchAPIRequest) {	
+			if(log.isDebugEnabled()) 
+				log.debug("requests are not matching with the allowed URIs, please check the url");
+		}
 		
 		if(matchAPIRequest && !StringUtils.isEmpty(authorization)) {
 			hashMatched = hashMatchStatus(uri, randomSecret, authorization);			
@@ -88,7 +92,8 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 		if(!validAuth) {			
 			throw new Exception("Authorization validation issue with the token. please check");
 		}
-		log.info("validate authorization with date and uri for the request return with {}", validAuth);
+		if(log.isDebugEnabled()) 
+			log.debug("validate authorization with date and uri for the request return with {}", validAuth);
 		return validAuth;
 	}
 

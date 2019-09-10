@@ -2,21 +2,28 @@ package com.pheonix.pojo;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 
 
 public class TokenRequest {
 
 	
-	
+	@NotBlank
 	private String id;
 	
-	
+	@Min(value = 1, message = "The value must be positive and greater than 0")
 	private int expiration;
 	
+	@NotBlank
 	private String eServiceId;
 	
+	@NotNull
 	private List<Services> services;
 
+	@NotBlank
 	private String user;
 	
 	public TokenRequest() {}
