@@ -4,7 +4,6 @@ package com.pheonix.utils;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +16,9 @@ public class CredentialsDecryption{
 	public String decrypt(String uniqueKey, String encryptedData) {
 		if(log.isDebugEnabled())
 			log.debug("generating decryption from the encrypted data {}", encryptedData);		
-		BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-		textEncryptor.setPasswordCharArray(uniqueKey.toCharArray());
-		return textEncryptor.decrypt(encryptedData);
+
+		
+		return null; 
+
 	}
 }
