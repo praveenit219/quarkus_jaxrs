@@ -30,7 +30,7 @@ import com.pheonix.utils.StringUtils;
 
 
 
-@Path("/phoenix/api/identity")
+@Path("/identity/saml")
 public class JwtUserController {
 
 	private static final Logger log = LoggerFactory.getLogger(JwtUserController.class);

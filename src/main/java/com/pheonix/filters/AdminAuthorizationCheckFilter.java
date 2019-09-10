@@ -5,7 +5,6 @@ import java.util.Base64;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.pheonix.qualifiers.AdminApiAuthorizationCheck;
 
 @Provider
-@PreMatching
 @AdminApiAuthorizationCheck
 public class AdminAuthorizationCheckFilter implements ContainerRequestFilter {
 	
@@ -26,8 +24,15 @@ public class AdminAuthorizationCheckFilter implements ContainerRequestFilter {
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		log.info("checking the authorization for the admin API");
 		String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-		byte[] decodedAuthValue = Base64.getDecoder().decode(authHeader.substring(authHeader.indexOf(' ')+1));
+		log.info("authHeader {}", authHeader);
+		String[] authParts = authHeader.split("\\s+");
+        String authInfo = authParts[1];
+        // Decode the data back to original string
+        byte[] bytes = Base64.getDecoder().decode(authInfo);        
+        String decodedAuthValue = new String(bytes);
+        log.info("decodedAuthValue {}", decodedAuthValue);
 		String[] cred = decodedAuthValue.toString().split(":");
+		log.info("cred {} {}", cred, cred.length);
 		boolean allowed = false;
 		if(cred.length==2) {
 			if(cred[0].equals("admin") && cred[1].equals("YWRtaW46cGFzc3dvcmQkMQ==")) {
@@ -36,7 +41,7 @@ public class AdminAuthorizationCheckFilter implements ContainerRequestFilter {
 			}
 		}
 		if(!allowed) {
-			requestContext.abortWith(Response.accepted("forbidden!").build());
+			requestContext.abortWith(Response.status(Response.Status.FORBIDDEN.getStatusCode(), "forbidden!").build());
 		}
 	}
 

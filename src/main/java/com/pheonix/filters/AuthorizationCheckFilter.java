@@ -14,7 +14,6 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
@@ -28,7 +27,6 @@ import com.pheonix.qualifiers.AuthorizationCheck;
 import com.pheonix.utils.StringUtils;
 
 @Provider
-@PreMatching
 @AuthorizationCheck
 public class AuthorizationCheckFilter implements ContainerRequestFilter {
 	
@@ -51,12 +49,12 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 		String dateHeader = requestContext.getHeaderString(HttpHeaders.DATE);		
 		boolean isRequestValid = false;
 		try {
-			isRequestValid =	validateAuthorization(requestContext.getUriInfo().getRequestUri().toString(), dateHeader, authHeader, true );
+			isRequestValid =	validateAuthorization(requestContext.getUriInfo().getPath(), dateHeader, authHeader, true );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(!isRequestValid) {
-			requestContext.abortWith(Response.accepted("forbidden!").build());
+			requestContext.abortWith(Response.status(Response.Status.FORBIDDEN.getStatusCode(), "forbidden!").build());
 		}
 	}
 
@@ -64,13 +62,14 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 		log.info("validate authorization with date and uri for the request");
 		String randomSecret = "FNgLY+f.N{&M;/jp`J$X<<.e/lF[<C)r9(-[DT!LsPWmrMBZL7_@&<^N|zx9l?&";
 
-
+		log.info("uri calling is {}", uri);
 		boolean validAuth = false;
 		boolean hashMatched = false;
 		boolean isClockSkewCheck = authHeaderConfigs.isClockSkewDifference();
 		if(log.isDebugEnabled())
 			log.debug("authorization received in header is {}",authorization);
 		boolean matchAPIRequest =  verifyApiRequestMatch(uri, isJweRequired);
+		
 		if(!matchAPIRequest) 			
 			log.info("requests are not matching with the allowed URIs, please check the url");
 		
