@@ -58,8 +58,9 @@ public class KeyPairGenerator {
 	}
 
 	protected InputStream readProtectedResorce(){
-		return getClass()
-				.getClassLoader().getResourceAsStream("samljwt.jks");
+		// ClassLoader.getSystemClassLoader().getResourceAsStream("samljwt.jks");
+		 return Thread.currentThread().getContextClassLoader().getResourceAsStream("samljwt.jks");
+		//return getClass().getClassLoader().getResourceAsStream("samljwt.jks");
 	}
 
 

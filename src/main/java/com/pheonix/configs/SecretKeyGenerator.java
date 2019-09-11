@@ -54,8 +54,10 @@ public class SecretKeyGenerator {
 	}
 
 	protected InputStream readProtectedResorce(){
-		return getClass()
-				.getClassLoader().getResourceAsStream("License.md");
+		//return ClassLoader.getSystemClassLoader().getResourceAsStream("License.md");
+		return Thread.currentThread().getContextClassLoader().getResourceAsStream("License.md");
+		//changed due to native image system loader 
+		//return getClass().getClassLoader().getResourceAsStream("License.md");
 	}
 
 	private void generateCheckSum(String algorithm) throws IOException, NoSuchAlgorithmException  {
