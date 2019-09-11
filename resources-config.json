@@ -1,0 +1,10 @@
+{
+  "resources": [
+    {
+    	"pattern": ".*\\.md$"
+    },
+    {
+    	"pattern": ".*\\.jks$"
+    }
+  ]
+}
