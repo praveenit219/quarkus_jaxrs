@@ -17,7 +17,7 @@
     "allDeclaredFields" : true,
     "allPublicFields" : true
   },
-   {
+  {
     "name" : "com.pheonix.pojo.JwtTokenResponse",
     "allDeclaredConstructors" : true,
     "allPublicConstructors" : true,
@@ -25,5 +25,15 @@
     "allPublicMethods" : true,
     "allDeclaredFields" : true,
     "allPublicFields" : true
+  },
+  {
+    "name" : "java.security.KeyStoreSpi",
+    "allDeclaredConstructors" : true,
+    "allPublicConstructors" : true,
+    "allDeclaredMethods" : true,
+    "allPublicMethods" : true,
+    "allDeclaredFields" : true,
+    "allPublicFields" : true
   }
+   
 ]
