@@ -1,6 +1,10 @@
 {
   "resources": [
-    {"pattern": ".*/License.*md$"},
-    {"pattern": ".*/samljwt.*jks$"}
+    {
+    	"pattern": ".*/License.*md$"
+    },
+    {
+    	"pattern": ".*/samljwt.*jks$"
+    }
   ]
 }
