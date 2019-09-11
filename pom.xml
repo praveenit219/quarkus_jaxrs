@@ -57,7 +57,6 @@ memory test</description>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-resteasy-jsonb</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
@@ -120,9 +119,11 @@ memory test</description>
 								</goals>
 								<configuration>
 									<enableHttpUrlHandler>true</enableHttpUrlHandler>
+									<enableJni>true</enableJni>
+                                    <enableAllSecurityServices>true</enableAllSecurityServices>
 									<additionalBuildArgs>
 										<additionalBuildArg>-H:ReflectionConfigurationFiles=${project.basedir}/reflection-config.json</additionalBuildArg>
-										<additionalBuildArg>-H:ResourceConfigurationFiles=${project.basedir}/resources-config.json</additionalBuildArg>
+										<additionalBuildArg>-H:ResourceConfigurationFiles=${project.basedir}/resources-config.json</additionalBuildArg>	
 									</additionalBuildArgs>
 								</configuration>
 							</execution>
