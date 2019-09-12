@@ -22,6 +22,7 @@ RUN mkdir -p /tmp/ssl-libs/lib \
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 WORKDIR /work/
 COPY target/*-runner /work/application
+COPY --from=nativebuilder /tmp/ssl-libs/ /work/
 RUN chmod 775 /work
 EXPOSE 8080
 CMD ["./application", "-Dquarkus.http.host=0.0.0.0", "-Dquarkus.mongodb.connection-string=mongodb://10.0.2.2:27017/samlJwt", "-Djava.library.path=/work/lib", "-Djavax.net.ssl.trustStore=/work/cacerts"]
