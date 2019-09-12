@@ -22,6 +22,7 @@ public class ClockSkewService {
 
 	private static final Logger log = LoggerFactory.getLogger(ClockSkewService.class);
 
+	public ClockSkewService() {}
 
 	public ClockSkewResponse processClockSkewSecretDetails(String uri) {
 		String secret = "FNgLY+f.N{&M;/jp`J$X<<.e/lF[<C)r9(-[DT!LsPWmrMBZL7_@&<^N|zx9l?&";

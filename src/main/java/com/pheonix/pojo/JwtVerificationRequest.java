@@ -7,6 +7,8 @@ public class JwtVerificationRequest {
 	
 	@NotNull @NotEmpty
 	private String token;
+	
+	public JwtVerificationRequest() {}
 
 	public String getToken() {
 		return token;

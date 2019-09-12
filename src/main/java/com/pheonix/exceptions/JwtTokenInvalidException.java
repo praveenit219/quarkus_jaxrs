@@ -7,10 +7,11 @@ import javax.ws.rs.ext.Provider;
 import com.pheonix.utils.ExceptionUtils;
 
 @Provider
-public class JwtTokenInvalidException extends Exception implements ExceptionMapper<JwtTokenInvalidException> {
+public class JwtTokenInvalidException extends RuntimeException implements ExceptionMapper<JwtTokenInvalidException> {
 
 
 	private static final long serialVersionUID = -4335896511660306030L;
+	
 	public JwtTokenInvalidException() {}
 
 	public JwtTokenInvalidException(String msg) {

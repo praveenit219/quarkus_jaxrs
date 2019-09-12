@@ -9,6 +9,7 @@ public class JwtResponse {
 	private boolean valid;
 	private JwtClaims jwtClaims;
 	
+	public JwtResponse() {}
 	
 	public JwtResponse(boolean valid, JwtClaims jwtClaims) {
 		super();

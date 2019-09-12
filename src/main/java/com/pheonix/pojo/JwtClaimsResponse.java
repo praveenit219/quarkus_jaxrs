@@ -10,6 +10,7 @@ public class JwtClaimsResponse {
 	private Map claims;
 	private String issuer;
 	
+	public JwtClaimsResponse() {}
 	
 	public JwtClaimsResponse(boolean valid, Map claims, String issuer) {
 		super();

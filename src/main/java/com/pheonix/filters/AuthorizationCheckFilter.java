@@ -1,6 +1,5 @@
 package com.pheonix.filters;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -44,7 +43,7 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 	AuthHeaderConfigs authHeaderConfigs;
 
 	@Override
-	public void filter(ContainerRequestContext requestContext) throws IOException {
+	public void filter(ContainerRequestContext requestContext) {
 		String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		String dateHeader = requestContext.getHeaderString(HttpHeaders.DATE);		
 		boolean isRequestValid = false;
@@ -59,7 +58,7 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 		}
 	}
 
-	public boolean validateAuthorization(String uri, String generatedTime, String authorization, boolean isJweRequired) throws Exception {
+	public boolean validateAuthorization(String uri, String generatedTime, String authorization, boolean isJweRequired) throws Exception  {
 		if(log.isDebugEnabled()) 
 			log.debug("validate authorization with date and uri for the request");
 		String randomSecret = "FNgLY+f.N{&M;/jp`J$X<<.e/lF[<C)r9(-[DT!LsPWmrMBZL7_@&<^N|zx9l?&";

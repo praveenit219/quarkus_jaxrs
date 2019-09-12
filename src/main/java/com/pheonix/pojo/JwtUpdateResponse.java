@@ -7,6 +7,8 @@ public class JwtUpdateResponse {
 	private String modifiedBy;
 	private String modifiedDate;
 	
+	public JwtUpdateResponse() {}
+	
 	public String getJwtToken() {
 		return jwtToken;
 	}

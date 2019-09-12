@@ -2,6 +2,8 @@ package com.pheonix.pojo;
 
 public class ClockSkewRequest {
 	
+	public ClockSkewRequest() {}
+	
 	private String request;
 
 	public String getRequest() {

@@ -8,7 +8,7 @@ public class ClockSkewResponse {
 	private long date;
 	private String validity;
 	
-	
+	public ClockSkewResponse() {}
 	
 	public String getUri() {
 		return uri;

@@ -3,7 +3,9 @@ package com.pheonix.pojo;
 public class SensitiveDataResponse {
 	
 	private String encryptedData;
-
+	
+	public SensitiveDataResponse() {}
+	
 	public String getEncryptedData() {
 		return encryptedData;
 	}

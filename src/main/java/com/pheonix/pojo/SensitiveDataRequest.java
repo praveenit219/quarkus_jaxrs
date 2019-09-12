@@ -6,6 +6,8 @@ public class SensitiveDataRequest {
 	
 	@NotEmpty
 	private String data;
+	
+	public SensitiveDataRequest() {}
 
 	public String getData() {
 		return data;
