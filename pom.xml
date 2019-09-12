@@ -52,8 +52,10 @@ memory test</description>
 			<artifactId>jose4j</artifactId>
 			<version>${jose4j.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>io.quarkus</groupId> <artifactId>quarkus-mongodb-client</artifactId> 
-			</dependency> -->
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-mongodb-client</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-resteasy-jsonb</artifactId>
@@ -120,10 +122,10 @@ memory test</description>
 								<configuration>
 									<enableHttpUrlHandler>true</enableHttpUrlHandler>
 									<enableJni>true</enableJni>
-                                    <enableAllSecurityServices>true</enableAllSecurityServices>
+									<enableAllSecurityServices>true</enableAllSecurityServices>
 									<additionalBuildArgs>
 										<additionalBuildArg>-H:ReflectionConfigurationFiles=${project.basedir}/reflection-config.json</additionalBuildArg>
-										<additionalBuildArg>-H:ResourceConfigurationFiles=${project.basedir}/resources-config.json</additionalBuildArg>	
+										<additionalBuildArg>-H:ResourceConfigurationFiles=${project.basedir}/resources-config.json</additionalBuildArg>
 									</additionalBuildArgs>
 								</configuration>
 							</execution>
