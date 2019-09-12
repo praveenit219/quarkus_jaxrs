@@ -2,10 +2,12 @@ package com.pheonix.exceptions;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 import com.pheonix.utils.ExceptionUtils;
 
-public class JwtTokenNotFoundException extends RuntimeException implements ExceptionMapper<JwtTokenNotFoundException> {
+@Provider
+public class JwtTokenNotFoundException extends Exception implements ExceptionMapper<JwtTokenNotFoundException> {
 
 	private static final long serialVersionUID = 2733185269519094982L;
 

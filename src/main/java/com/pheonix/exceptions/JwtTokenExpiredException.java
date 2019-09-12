@@ -7,7 +7,7 @@ import javax.ws.rs.ext.Provider;
 import com.pheonix.utils.ExceptionUtils;
 
 @Provider
-public class JwtTokenExpiredException extends RuntimeException implements ExceptionMapper<JwtTokenExpiredException> {
+public class JwtTokenExpiredException extends Exception implements ExceptionMapper<JwtTokenExpiredException> {
 
 
 	private static final long serialVersionUID = -4335896511660306030L;
