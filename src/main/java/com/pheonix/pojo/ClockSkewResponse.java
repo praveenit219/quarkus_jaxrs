@@ -1,5 +1,6 @@
 package com.pheonix.pojo;
 
+
 public class ClockSkewResponse {
 	
 	private String uri;
