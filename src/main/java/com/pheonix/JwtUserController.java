@@ -121,7 +121,8 @@ public class JwtUserController {
 	private JwtUpdateResponse processTokenStatusUpdate(String uri, @Valid JwtUpdateRequest tokenUpdateRequest) {
 		JwtUpdateResponse jwtUpdateResponse = null;
 		String jwtOrJwe = StringUtils.findPathForJWtorJWE(uri);
-		log.info("processing deletion of token for {}", tokenUpdateRequest.getId());
+		if(log.isDebugEnabled())
+			log.debug("processing deletion of token for {}", tokenUpdateRequest.getId());
 		if(!StringUtils.isEmpty(jwtOrJwe)) {
 			log.debug("modifying status of token in db");
 			return jwtRepositoryService.updateTokenStatus(tokenUpdateRequest.getModifiedBy(),tokenUpdateRequest.getId());			
@@ -134,12 +135,14 @@ public class JwtUserController {
 		JwtClaimsResponse jwtResponse = null;		
 		int status = -1;
 		String jwtOrJwe = StringUtils.findPathForJWtorJWE(uri);
-		log.info("verifying token for {}", jwtOrJwe);
+		if(log.isDebugEnabled())
+			log.debug("verifying token for {}", jwtOrJwe);
 		if(!StringUtils.isEmpty(jwtOrJwe)) {
 			try {
 				jwtResponse = jwtUserService.verifyClaimsOnly(token,jwtOrJwe);
 				status = jwtRepositoryService.verifyJwtTokenStatus(token);
-				log.info("status from db is {}", status);
+				if(log.isDebugEnabled())
+					log.debug("status from db is {}", status);
 				if(status == 1) {
 					log.debug("verify the jwe status using the security mechanism");
 					jwtResponse = jwtUserService.verifyClaimsOnly(token,jwtOrJwe);
@@ -175,7 +178,8 @@ public class JwtUserController {
 	private  JwtTokenResponse processRequestforTokenGeneration(String uri, TokenRequest tokenRequest) {
 		JwtTokenResponse jwtResponse = null;	
 		String jwtOrJwe = StringUtils.findPathForJWtorJWE(uri);
-		log.info("processing {} token for {}", jwtOrJwe, tokenRequest);
+		if(log.isDebugEnabled())
+			log.debug("processing {} token for {}", jwtOrJwe, tokenRequest);
 		if(!StringUtils.isEmpty(jwtOrJwe)) {
 			jwtResponse = jwtUserService.buildJwt(tokenRequest,jwtOrJwe);
 			if(null!=jwtResponse) {				

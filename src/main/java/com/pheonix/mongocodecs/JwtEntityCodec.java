@@ -80,7 +80,8 @@ public class JwtEntityCodec implements CollectibleCodec<JwtEntity> {
 
 	@Override
 	public boolean documentHasId(JwtEntity document) {
-		log.info("inside document to check id {} {}", document.getId(), !StringUtils.isEmpty(document.getId()));
+		if(log.isDebugEnabled())
+			log.debug("inside document to check id {} {}", document.getId(), !StringUtils.isEmpty(document.getId()));
 		return !StringUtils.isEmpty(document.getId());
 	}
 

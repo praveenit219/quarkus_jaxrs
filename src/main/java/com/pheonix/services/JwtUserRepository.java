@@ -51,7 +51,8 @@ public class JwtUserRepository {
 		JwtEntity jwtEntity =	new JwtEntity();
 		createJwtEntity(jwtEntity, jwtResponse, tokenRequest);
 		mongoCollection.insertOne(jwtEntity);
-		log.info("saved jwtInformation to db ");	
+		if(log.isDebugEnabled()) 
+			log.debug("saved jwtInformation to db ");	
 		return jwtEntity;
 	}
 
@@ -74,7 +75,8 @@ public class JwtUserRepository {
 		if(log.isDebugEnabled()) 
 			log.debug("finding  jwtInformation from db for token {}",jwtToken);		
 		JwtEntity jwtEntity = mongoCollection.find(Filters.eq("jwtToken", jwtToken)).first();
-		log.info("identified jwtInformation from db");	
+		if(log.isDebugEnabled()) 
+			log.debug("identified jwtInformation from db");	
 		return (null!=jwtEntity)?jwtEntity.getStatus():-1;
 	}
 
@@ -99,8 +101,8 @@ public class JwtUserRepository {
 			deleteJwtStatus.setModifiedDate(jwtEntity.getModifiedDate());
 			deleteJwtStatus.setStatus((jwtEntity.getStatus()==0)?"inactive":null);
 		}
-		 
-		log.info("updated jwtInformation to db ");	
+		if(log.isDebugEnabled()) 
+			log.debug("updated jwtInformation to db ");	
 		return deleteJwtStatus;
 	}
 
