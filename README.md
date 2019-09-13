@@ -1,4 +1,4 @@
-# Quarkus Graal Native Image!
+# Learning - Quarkus Graal Native Image for jaxrs mongo jose4j jwt!
 
 This project is to tryout new lightweight java framework with native graaljvm and openjdk 8 or 11 jvm. no testcases were written as this is eager to learn and see the differences. this include mainly
 >  jax-rs, quarkus-mongo, quarkus-di, quarkus-resteasy, quarkus-jsonb, jose-4j, docker, 
