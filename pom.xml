@@ -126,6 +126,7 @@ memory test</description>
 									<additionalBuildArgs>
 										<additionalBuildArg>-H:ReflectionConfigurationFiles=${project.basedir}/reflection-config.json</additionalBuildArg>
 										<additionalBuildArg>-H:ResourceConfigurationFiles=${project.basedir}/resources-config.json</additionalBuildArg>
+										<additionalBuildArg>-Djava.net.preferIPv4Stack=true</additionalBuildArg>
 									</additionalBuildArgs>
 								</configuration>
 							</execution>

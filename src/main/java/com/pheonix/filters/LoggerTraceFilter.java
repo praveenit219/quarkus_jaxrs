@@ -20,7 +20,7 @@ public class LoggerTraceFilter implements ContainerRequestFilter , ContainerResp
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		String correlationId = replaceAscii(requestContext.getHeaderString("ecquaria-correlationId"));
+		String correlationId = replaceAscii(requestContext.getHeaderString("ph-correlationId"));
 		MDC.put("traceId", correlationId);
 
 	}
@@ -28,7 +28,7 @@ public class LoggerTraceFilter implements ContainerRequestFilter , ContainerResp
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
 			throws IOException {
-		responseContext.getHeaders().add("ecquaria-correlationId", MDC.get("traceId"));
+		responseContext.getHeaders().add("ph-correlationId", MDC.get("traceId"));
 		MDC.remove("traceId");
 
 	}

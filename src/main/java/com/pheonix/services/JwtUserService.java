@@ -75,8 +75,8 @@ public class JwtUserService {
 		}
 
 		jwtRequest.setClaims(claims);
-		jwtRequest.setIssuer("ECQSamlGW-Identity");
-		jwtRequest.setSubject("ECQ Saml Serivce");
+		jwtRequest.setIssuer("PH-Identity-SERVER");
+		jwtRequest.setSubject("PH IDENTITY Serivce");
 		jwtRequest.setJwtExpiryInDays(tokenRequest.getExpiration());		
 	}	
 

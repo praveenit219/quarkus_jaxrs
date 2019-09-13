@@ -38,7 +38,7 @@ public class JwtHandler {
 
 	private static final String CONTENT_TYPE_JWT_HEADER_VALUE = "JWT";
 
-	private static final String TOKEN_ISSUER = "ECQSamlGW-Identity";
+	private static final String TOKEN_ISSUER = "PH-Identity-SERVER";
 
 
 	@Inject

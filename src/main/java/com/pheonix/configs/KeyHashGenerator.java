@@ -25,10 +25,10 @@ public class KeyHashGenerator {
 
 	private static final Logger log = LoggerFactory.getLogger(KeyHashGenerator.class);
 
-	private static final  String[]  api = { "/identity/saml/jwt/token",
-			"/identity/saml/jwe/token",
-			"/identity/saml/jwt/token/claims",
-	"/identity/saml/jwe/token/claims"} ;
+	private static final  String[]  api = { "/api/identity/jwt/token",
+			"/api/identity/jwe/token",
+			"/api/identity/jwt/token/claims",
+	"/api/identity/jwe/token/claims"} ;
 
 	private  Map<String,String> apiKeyHash = new HashMap<>();
 

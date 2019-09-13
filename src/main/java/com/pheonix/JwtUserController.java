@@ -41,7 +41,7 @@ import com.pheonix.utils.StringUtils;
 
 
 
-@Path("/identity/saml")
+@Path("/api/identity")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class JwtUserController {

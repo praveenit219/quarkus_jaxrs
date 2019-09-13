@@ -1,0 +1,11 @@
+version: '3' 
+  
+services:
+  ph-jaxrs-nativeimage:
+    image: ph-jaxrs-nativeimage:latest
+    ports:
+      - 11095:11095
+    extra_hosts:
+          - "mongo-arbiter:1.1.1.1"
+          - "mongo-secondary:2.2.2.2"
+          - "mongo-primary:3.3.3.3"

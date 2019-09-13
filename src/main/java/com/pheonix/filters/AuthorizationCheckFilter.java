@@ -31,10 +31,10 @@ public class AuthorizationCheckFilter implements ContainerRequestFilter {
 	
 	private static final Logger log = LoggerFactory.getLogger(AuthorizationCheckFilter.class);
 
-	private static final  String[]  apiJwt = { "/identity/saml/jwt/token","/identity/saml/jwt/token/claims"} ;
+	private static final  String[]  apiJwt = { "/api/identity/jwt/token","/api/identity/jwt/token/claims"} ;
 
-	private static final  String[]  apiAll = { "/identity/saml/jwt/token", "/identity/saml/jwe/token",	
-			"/identity/saml/jwt/token/claims",	"/identity/saml/jwe/token/claims"} ;
+	private static final  String[]  apiAll = { "/api/identity/jwt/token", "/api/identity/jwe/token",	
+			"/api/identity/jwt/token/claims",	"/api/identity/jwe/token/claims"} ;
 	
 	@Inject
 	KeyHashGenerator keyHashGenerator;
