@@ -29,7 +29,7 @@ memory test</description>
 		<quarkus.version>0.21.2</quarkus.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<jose4j.version>0.6.5</jose4j.version>
+		<jose4j.version>0.9.3</jose4j.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
